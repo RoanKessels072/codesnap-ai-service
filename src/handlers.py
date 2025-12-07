@@ -45,7 +45,7 @@ async def handle_generate_rival(data: dict):
         grading_result = await nats_client_instance.request(
             "attempts.grade_ephemeral", 
             grading_payload, 
-            timeout=10.0
+            timeout=20.0
         )
     except Exception as e:
         print(f"Error requesting grading for AI rival: {e}")
