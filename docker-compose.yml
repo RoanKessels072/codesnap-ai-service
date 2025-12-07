@@ -1,0 +1,20 @@
+services:
+  ai-service:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: codesnap-ai-service
+    
+    env_file:
+      - .env
+    
+    ports:
+      - "${PORT}:${PORT}"
+      
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  default:
+    external: true
+    name: shared-codesnap-network
