@@ -30,7 +30,7 @@ async def handle_generate_rival(data: dict):
         description=msg.exercise_description,
         difficulty=msg.difficulty,
         starter_code=msg.starter_code,
-        
+        function_name=msg.function_name
     )
     
     try:
@@ -58,6 +58,10 @@ async def handle_generate_rival(data: dict):
         }
 
     return RivalResponse(
-        ai_code=ai_code,
-        ai_result=grading_result
-    ).model_dump(mode='json')
+    ai_code=ai_code,
+    score=grading_result.get("score", 0),
+    stars=grading_result.get("stars", 0),
+    tests_passed=grading_result.get("tests_passed", 0),
+    tests_total=grading_result.get("tests_total", 0),
+    ai_result=grading_result
+).model_dump(mode='json')

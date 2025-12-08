@@ -17,10 +17,14 @@ class RivalGenerationRequest(BaseModel):
     exercise_description: str
     difficulty: str = "easy"
     language: str
-    starter_code: str
+    starter_code: Optional[str] = None
     function_name: str
     test_cases: list
 
 class RivalResponse(BaseModel):
     ai_code: str
+    score: int
+    stars: int
+    tests_passed: int
+    tests_total: int
     ai_result: dict[str, Any]

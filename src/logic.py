@@ -1,5 +1,6 @@
 import re
 import os
+from typing import Optional
 from google import genai
 from src.config import settings
 
@@ -12,7 +13,6 @@ def get_client():
     return client
 
 def extract_code_from_markdown(text: str, language: str = None) -> str:
-    """Extract code from markdown code blocks."""
     pattern = r'```(?:' + (language or r'\w*') + r')?\n(.*?)```'
     matches = re.findall(pattern, text, re.DOTALL)
     if matches:
@@ -42,7 +42,7 @@ def generate_feedback_logic(code: str, language: str, exercise_name: str, descri
     
     try:
         response = client.models.generate_content(
-            model="models/gemini-2.5-pro",
+            model="models/gemini-2.5-flash",
             contents=[prompt]
         )
         text = response.text.strip()
@@ -53,8 +53,15 @@ def generate_feedback_logic(code: str, language: str, exercise_name: str, descri
         print(f"GenAI Error (Feedback): {e}")
         return f"# Error generating feedback: {str(e)}"
 
-def generate_rival_logic(language: str, exercise_name: str, description: str, difficulty: str, starter_code: str) -> str:
+def generate_rival_logic(language: str, exercise_name: str, description: str, difficulty: str, starter_code: Optional[str], function_name: str) -> str:
     client = get_client()
+    
+    code_context = ""
+    if starter_code:
+        code_context = f"Starter code:\n{starter_code}"
+    else:
+        code_context = f"Function Signature required: function named '{function_name}'."
+
     prompt = f"""
         You are an AI competitor in a coding exercise. Create a solution in {language}.
 
@@ -75,13 +82,12 @@ def generate_rival_logic(language: str, exercise_name: str, description: str, di
         Exercise description: {description}
         Difficulty: {difficulty}
         
-        Starter code:
-        {starter_code}
+        {code_context}
     """
     
     try:
         response = client.models.generate_content(
-            model="models/gemini-2.5-pro",
+            model="models/gemini-2.5-flash",
             contents=[prompt]
         )
         text = response.text.strip()
@@ -89,4 +95,4 @@ def generate_rival_logic(language: str, exercise_name: str, description: str, di
         return text
     except Exception as e:
         print(f"GenAI Error (Rival): {e}")
-        return starter_code
+        return starter_code if starter_code else f"def {function_name}():\n    pass"
