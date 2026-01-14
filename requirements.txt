@@ -5,3 +5,4 @@ pydantic-settings
 nats-py
 google-genai
 prometheus-client
+prometheus-fastapi-instrumentator

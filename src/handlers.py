@@ -22,6 +22,7 @@ async def handle_get_feedback(data: dict):
     return AssistantFeedbackResponse(response=feedback).model_dump(mode='json')
 
 async def handle_generate_rival(data: dict):
+    print(f"DEBUG: Received Rival Request for {data.get('exercise_name')}", flush=True)
     msg = RivalGenerationRequest(**data)
     
     ai_code = generate_rival_logic(
@@ -42,11 +43,13 @@ async def handle_generate_rival(data: dict):
             "test_cases": msg.test_cases
         }
         
+        print("DEBUG: Requesting ephemeral grading...", flush=True)
         grading_result = await nats_client_instance.request(
             "attempts.grade_ephemeral", 
             grading_payload, 
             timeout=20.0
         )
+        print(f"DEBUG: Rival Grading Result: {grading_result}", flush=True)
     except Exception as e:
         print(f"Error requesting grading for AI rival: {e}")
         grading_result = {

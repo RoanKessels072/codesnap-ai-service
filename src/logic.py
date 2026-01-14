@@ -72,7 +72,7 @@ def generate_rival_logic(language: str, exercise_name: str, description: str, di
         - Depending on the difficulty level, introduce mistakes, inefficiencies, or edge-case oversights:
           - easy → more likely to have obvious mistakes (wrong logic, missing return, etc.)
           - medium → subtle mistakes or missing edge cases
-          - hard → mostly correct, small inefficiencies or minor mistakes
+          - hard → mostly correct, but leave small inefficiencies or minor mistakes
         - Output ONLY the executable code with NO explanations, NO markdown, NO additional text.
         - Do NOT use markdown code blocks (```). 
         - Start immediately with the function definition.
