@@ -69,10 +69,11 @@ def generate_rival_logic(language: str, exercise_name: str, description: str, di
         - Your goal is to provide a plausible solution to the exercise.
         - You MUST use the exact function signature/name provided in the starter code below.
         - Complete the function implementation based on the exercise description.
-        - Depending on the difficulty level, introduce mistakes, inefficiencies, or edge-case oversights:
-          - easy → more likely to have obvious mistakes (wrong logic, missing return, etc.)
-          - medium → subtle mistakes or missing edge cases
-          - hard → mostly correct, but leave small inefficiencies or minor mistakes
+        - **CRITICAL**: If the exercise requires returning specific strings (like "Hello, World!"), you MUST respect punctuation (commas, exclamation marks) EXACTLY as described.
+        - Difficulty Adjustments:
+          - **easy**: Introduce syntax errors or major logic flaws (e.g., return incorrect type, infinite loop possibility).
+          - **medium**: Implement a naive solution that works for basic cases but fails edge cases or uses inefficient logic (O(n^2) instead of O(n)).
+          - **hard**: Provide an almost optimal, production-ready solution. It should pass all tests including edge cases, but have minor style issues to still remain beatable.
         - Output ONLY the executable code with NO explanations, NO markdown, NO additional text.
         - Do NOT use markdown code blocks (```). 
         - Start immediately with the function definition.
