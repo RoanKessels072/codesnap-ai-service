@@ -23,6 +23,13 @@ spec:
           env:
             - name: NATS_URL
               value: "nats://nats:4222"
+            - name: LOGFIRE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: logfire-secrets
+                  key: write-token
+            - name: LOGFIRE_SERVICE_NAME
+              value: "ai-service"
 
             - name: GOOGLE_API_KEY
               valueFrom:

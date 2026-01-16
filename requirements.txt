@@ -7,3 +7,4 @@ google-genai
 prometheus-client
 prometheus-fastapi-instrumentator
 
+logfire[fastapi]
