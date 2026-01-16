@@ -14,10 +14,12 @@ spec:
       labels:
         app: ai-service
     spec:
+      imagePullSecrets:
+        - name: ecr-secret
       containers:
         - name: ai-service
-          image: roankessels072/codesnap-ai-service:latest
-          imagePullPolicy: Never # Use local image, don't try to pull from Docker Hub
+          image: 239861161036.dkr.ecr.eu-central-1.amazonaws.com/codesnap/ai-service:v1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8005
           env:
@@ -39,7 +41,7 @@ spec:
           resources:
             requests:
               cpu: "100m"
-              memory: "128Mi"
+              memory: "256Mi"
             limits:
               cpu: "500m"
-              memory: "512Mi"
+              memory: "256Mi"
