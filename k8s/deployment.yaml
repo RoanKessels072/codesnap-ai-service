@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ai-service
-          image: roankessels/codesnap-ai-service:latest
+          image: roankessels/codesnap-ai-service:c04716591434d31de9577a341bafd7713d74e80c
           imagePullPolicy: Always
           ports:
             - containerPort: 8005
