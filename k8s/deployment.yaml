@@ -14,11 +14,9 @@ spec:
       labels:
         app: ai-service
     spec:
-      imagePullSecrets:
-        - name: ecr-secret
       containers:
         - name: ai-service
-          image: 239861161036.dkr.ecr.eu-central-1.amazonaws.com/codesnap/ai-service:v1
+          image: roankessels/codesnap-ai-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8005
